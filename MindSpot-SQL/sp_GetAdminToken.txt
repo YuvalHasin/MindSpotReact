@@ -1,0 +1,8 @@
+CREATE PROCEDURE sp_GetAdminToken
+    @adminId INT
+AS
+BEGIN
+    SELECT FCMToken 
+    FROM AdminTokens 
+    WHERE AdminId = @adminId;
+END

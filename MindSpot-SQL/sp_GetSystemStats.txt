@@ -1,0 +1,9 @@
+CREATE PROCEDURE sp_GetSystemStats
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        (SELECT COUNT(*) FROM Patients) AS TotalPatients,
+        (SELECT COUNT(*) FROM Therapists WHERE IsActive = 1) AS TotalTherapists,
+        (SELECT COUNT(*) FROM Therapists WHERE IsActive = 0) AS PendingTherapists -- ההתראה
+END

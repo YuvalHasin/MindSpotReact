@@ -1,0 +1,17 @@
+CREATE PROCEDURE sp_UpdateAdminToken
+    @adminId INT,
+    @token NVARCHAR(MAX)
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM AdminTokens WHERE AdminId = @adminId)
+    BEGIN
+        UPDATE AdminTokens 
+        SET FCMToken = @token, LastUpdated = GETDATE() 
+        WHERE AdminId = @adminId
+    END
+    ELSE
+    BEGIN
+        INSERT INTO AdminTokens (AdminId, FCMToken) 
+        VALUES (@adminId, @token)
+    END
+END

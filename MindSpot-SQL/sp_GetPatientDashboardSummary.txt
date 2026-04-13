@@ -1,0 +1,17 @@
+CREATE PROCEDURE sp_GetPatientDashboardSummary
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        p.FullName, 
+        p.Email,
+        -- תת-שאילתה לספירת סך כל הסשנים
+        (SELECT COUNT(*) FROM ChatSessions WHERE PatientId = p.Id) AS TotalSessions,
+        -- תת-שאילתה לספירת סשנים מהחודש האחרון
+        (SELECT COUNT(*) FROM ChatSessions WHERE PatientId = p.Id AND CreatedAt >= DATEADD(month, -1, GETDATE())) AS SessionsThisMonth
+    FROM Patients p
+    WHERE p.Id = @Id;
+END
+GO

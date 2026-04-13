@@ -1,0 +1,18 @@
+CREATE PROCEDURE sp_RegisterPatient
+    @FullName NVARCHAR(200),
+    @Email NVARCHAR(255),
+    @PasswordHash NVARCHAR(MAX)
+AS
+BEGIN
+    -- ולידציה: בדיקה אם המשתמש קיים
+    IF EXISTS (SELECT 1 FROM Patients WHERE Email = @Email)
+    BEGIN
+        RAISERROR('Email already exists', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Patients (FullName, Email, PasswordHash)
+    VALUES (@FullName, @Email, @PasswordHash);
+    
+    SELECT SCOPE_IDENTITY() AS NewPatientId;
+END

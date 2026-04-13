@@ -1,0 +1,10 @@
+-- עדכון פרטי אדמין (שם ואימייל)
+CREATE PROCEDURE sp_UpdateAdminProfile
+    @Id INT,
+    @FullName NVARCHAR(255),
+    @Email NVARCHAR(255)
+AS
+BEGIN
+    UPDATE Admins SET FullName = @FullName, Email = @Email WHERE Id = @Id
+END
+GO

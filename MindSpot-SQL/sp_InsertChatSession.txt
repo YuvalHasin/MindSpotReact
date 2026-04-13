@@ -1,0 +1,13 @@
+-- יצירת שורת היסטוריה לצ'אט (במקום sp_CreateChatSession אם השם שונה)
+CREATE PROCEDURE sp_InsertChatSession
+    @PatientId INT,
+    @CreatedAt DATETIME,
+    @Summary NVARCHAR(MAX),
+    @MessageCount INT,
+    @TherapistId INT = NULL
+AS
+BEGIN
+    INSERT INTO ChatSessions (PatientId, CreatedAt, Summary, MessageCount, RecommendedTherapistId)
+    VALUES (@PatientId, @CreatedAt, @Summary, @MessageCount, @TherapistId)
+END
+GO

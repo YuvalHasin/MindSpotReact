@@ -1,0 +1,53 @@
+-- 1. טבלת אדמינים (תואם ל-Admin.cs)
+CREATE TABLE Admins (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FullName NVARCHAR(200) NOT NULL,
+    Email NVARCHAR(255) UNIQUE NOT NULL,
+    PasswordHash NVARCHAR(MAX) NOT NULL
+);
+
+-- 2. טבלת מטפלים (תואם ל-Therapist.cs)
+CREATE TABLE Therapists (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FullName NVARCHAR(200) NOT NULL,
+    LicenseNumber NVARCHAR(100) UNIQUE NOT NULL,
+    Bio NVARCHAR(MAX),
+    Specialties NVARCHAR(MAX),
+	PhoneNumber NVARCHAR(20)	
+    -- שדה וקטורי נשמר בדרך כלל כמחרוזת JSON או בפורמט ייעודי ב-SQL
+    EmbeddingVectorJson NVARCHAR(MAX) 
+);
+
+-- 3. טבלת מטופלים (תואם ל-Patient.cs)
+CREATE TABLE Patients (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FullName NVARCHAR(200) NOT NULL,
+    Email NVARCHAR(255) UNIQUE NOT NULL,
+    PasswordHash NVARCHAR(MAX) NOT NULL,
+    CurrentTherapistId INT NULL, -- קשר למטפל (שידוך)
+    
+    -- שדות ה-Triage וה-AI שהופיעו במחלקה שלך:
+    LastTriageSummary NVARCHAR(MAX) NULL,
+    TriageEmbeddingJson NVARCHAR(MAX) NULL,
+    LastTriageDate DATETIME NULL,
+
+    CONSTRAINT FK_Patient_Therapist FOREIGN KEY (CurrentTherapistId) 
+    REFERENCES Therapists(Id) ON DELETE SET NULL
+);
+
+CREATE TABLE ChatSessions (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    PatientId INT NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    MessageCount INT DEFAULT 0,
+    Summary NVARCHAR(MAX) NULL,
+    
+    -- שינינו ל-TherapistName (NVARCHAR) כדי לשמור את השם שה-AI מצא
+    -- זה חוסך לנו Join מסובך אם אנחנו רק רוצים להציג את השם מההיסטוריה
+    TherapistName NVARCHAR(255) NULL, 
+);
+GO
+
+    CONSTRAINT FK_ChatSession_Patient FOREIGN KEY (PatientId) 
+    REFERENCES Patients(Id)
+);

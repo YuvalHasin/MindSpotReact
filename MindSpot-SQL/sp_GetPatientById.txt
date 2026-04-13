@@ -1,0 +1,15 @@
+CREATE OR ALTER PROCEDURE sp_GetPatientById
+    @Id INT
+AS
+BEGIN
+    SELECT 
+        Id, 
+        FullName, 
+        Email, 
+        PasswordHash, 
+        LastTriageSummary, 
+        LastTriageDate
+    FROM Patients
+    WHERE Id = @Id;
+END
+GO

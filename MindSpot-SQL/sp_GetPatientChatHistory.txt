@@ -1,0 +1,17 @@
+CREATE PROCEDURE sp_GetPatientChatHistory
+    @PatientId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Id, 
+        FORMAT(CreatedAt, 'dd/MM/yy') AS CreatedAt, -- יחזיר למשל: 09/04/26
+        MessageCount, 
+        Summary, 
+        TherapistName 
+    FROM ChatSessions
+    WHERE PatientId = @PatientId
+    ORDER BY CreatedAt DESC; -- הסדר עדיין יישמר לפי התאריך המקורי
+END
+GO

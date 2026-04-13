@@ -1,0 +1,9 @@
+CREATE PROCEDURE sp_DeletePatient
+    @PatientId INT
+AS
+BEGIN
+    SET NOCOUNT OFF; -- חשוב כדי ש-C# יקבל את מספר השורות שנמחקו (1)
+    
+    DELETE FROM Patients
+    WHERE Id = @PatientId;
+END

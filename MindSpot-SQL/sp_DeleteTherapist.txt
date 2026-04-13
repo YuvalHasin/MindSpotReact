@@ -1,0 +1,10 @@
+CREATE PROCEDURE sp_DeleteTherapist
+    @Id INT
+AS
+BEGIN
+    DELETE FROM Therapists 
+    WHERE Id = @Id;
+
+    -- החזרת מספר השורות שנמחקו
+    SELECT @@ROWCOUNT;
+END

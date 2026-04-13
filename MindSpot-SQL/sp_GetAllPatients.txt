@@ -1,0 +1,11 @@
+CREATE PROCEDURE sp_GetAllPatients
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        p.Id, p.FullName, p.Email, p.LastTriageDate, p.LastTriageSummary,
+        t.FullName AS AssignedTherapistName,
+        t.Id AS AssignedTherapistId
+    FROM Patients p
+    LEFT JOIN Therapists t ON p.CurrentTherapistId = t.Id
+END

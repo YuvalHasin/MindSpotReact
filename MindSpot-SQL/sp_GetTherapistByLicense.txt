@@ -1,0 +1,11 @@
+
+-- שליפת מטפלת לפי מספר רישיון
+CREATE PROCEDURE sp_GetTherapistByLicense
+    @LicenseNumber NVARCHAR(50)
+AS
+BEGIN
+    SELECT Id, FullName, LicenseNumber, Specialties, Bio, PhoneNumber, IsActive 
+    FROM Therapists 
+    WHERE LicenseNumber = @LicenseNumber
+END
+GO

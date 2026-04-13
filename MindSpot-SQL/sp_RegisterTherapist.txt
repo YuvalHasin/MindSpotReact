@@ -1,0 +1,16 @@
+CREATE PROCEDURE sp_RegisterTherapist
+    @FullName NVARCHAR(100),
+    @LicenseNumber NVARCHAR(50),
+    @Bio NVARCHAR(MAX) = NULL,
+    @Specialties NVARCHAR(MAX) = NULL,
+    @PhoneNumber NVARCHAR(20) = NULL, -- הפרמטר החדש
+    @Vector NVARCHAR(MAX) = NULL
+AS
+BEGIN
+    INSERT INTO Therapists (FullName, LicenseNumber, Bio, Specialties, PhoneNumber, EmbeddingVector, IsActive)
+    VALUES (@FullName, @LicenseNumber, @Bio, @Specialties, @PhoneNumber, @Vector, 0);
+    
+    SELECT SCOPE_IDENTITY(); -- מחזיר את ה-ID החדש ל-C#
+END
+GO
+END

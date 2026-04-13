@@ -1,0 +1,34 @@
+CREATE PROCEDURE sp_UpdatePatient
+    @Id INT,
+    @FullName NVARCHAR(200),
+    @Email NVARCHAR(255)
+AS
+BEGIN
+    -- אנחנו משאירים ON כדי למנוע הודעות מערכת מיותרות, 
+    -- אבל נחזיר את הערך בעצמנו בסוף.
+    SET NOCOUNT ON;
+
+    -- 1. ולידציה: האם המטופל בכלל קיים?
+    IF NOT EXISTS (SELECT 1 FROM Patients WHERE Id = @Id)
+    BEGIN
+        RAISERROR('Patient not found', 16, 1);
+        RETURN;
+    END
+
+    -- 2. ולידציה: האם האימייל החדש תפוס על ידי מישהו אחר?
+    IF EXISTS (SELECT 1 FROM Patients WHERE Email = @Email AND Id <> @Id)
+    BEGIN
+        RAISERROR('Email is already in use by another user', 16, 1);
+        RETURN;
+    END
+
+    -- 3. ביצוע העדכון
+    UPDATE Patients
+    SET FullName = @FullName,
+        Email = @Email
+    WHERE Id = @Id;
+
+    -- 4. החזרת מספר השורות שהושפעו (אמור להיות 1)
+    -- זה יגרום ל-ExecuteNonQuery ב-C# לקבל את הערך 1
+    SELECT @@ROWCOUNT; 
+END

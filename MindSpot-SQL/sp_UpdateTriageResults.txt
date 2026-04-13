@@ -1,0 +1,32 @@
+CREATE PROCEDURE sp_UpdateTriageResults
+    @PatientId INT,
+    @SessionId INT,
+    @Summary NVARCHAR(MAX),
+    @EmbeddingJson NVARCHAR(MAX),
+    @RecommendedTherapistId INT,    -- ה-ID בשביל טבלת Patients
+    @TherapistName NVARCHAR(MAX)    -- השם בשביל טבלת ChatSessions
+AS
+BEGIN
+    BEGIN TRANSACTION
+    BEGIN TRY
+        -- 1. עדכון פרופיל המטופל (כאן משאירים ID כי זה קשר לוגי ב-DB)
+        UPDATE Patients
+        SET LastTriageSummary = @Summary,
+            TriageEmbeddingJson = @EmbeddingJson,
+            LastTriageDate = GETDATE(),
+            CurrentTherapistId = @RecommendedTherapistId
+        WHERE Id = @PatientId;
+
+        -- 2. עדכון וסגירת הסשן (כאן משתמשים בשם בשביל ה-React)
+        UPDATE ChatSessions
+        SET Summary = @Summary,
+            TherapistName = @TherapistName -- התיקון כאן
+        WHERE Id = @SessionId;
+
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION
+        THROW;
+    END CATCH
+END

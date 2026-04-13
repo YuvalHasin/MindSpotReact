@@ -1,0 +1,13 @@
+CREATE PROCEDURE sp_CreateChatSession
+    @PatientId INT,
+    @Summary NVARCHAR(MAX),
+    @TherapistName NVARCHAR(MAX) -- שינינו מ-INT ל-NVARCHAR
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO ChatSessions (PatientId, CreatedAt, MessageCount, Summary, TherapistName)
+    VALUES (@PatientId, GETDATE(), 1, @Summary, @TherapistName);
+    
+    SELECT SCOPE_IDENTITY() AS SessionId;
+END

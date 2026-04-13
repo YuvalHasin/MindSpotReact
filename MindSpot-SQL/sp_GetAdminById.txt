@@ -1,0 +1,8 @@
+-- שליפת אדמין לפי ID (עבור בדיקת סיסמה ישנה)
+CREATE PROCEDURE sp_GetAdminById
+    @Id INT
+AS
+BEGIN
+    SELECT * FROM Admins WHERE Id = @Id
+END
+GO

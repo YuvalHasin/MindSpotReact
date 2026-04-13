@@ -1,0 +1,10 @@
+CREATE PROCEDURE sp_GetAllTherapists
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT 
+        Id, FullName, LicenseNumber, Bio, Specialties, 
+        EmbeddingVectorJson
+    FROM Therapists
+    ORDER BY FullName ASC;
+END

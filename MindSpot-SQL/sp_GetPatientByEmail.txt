@@ -1,0 +1,8 @@
+-- שליפת מטופל לפי אימייל
+CREATE PROCEDURE sp_GetPatientByEmail
+    @Email NVARCHAR(255)
+AS
+BEGIN
+    SELECT * FROM Patients WHERE Email = @Email
+END
+GO

@@ -1,0 +1,14 @@
+CREATE OR ALTER PROCEDURE sp_UpdatePatientTriage
+    @Id INT,
+    @Summary NVARCHAR(MAX),
+    @Vector NVARCHAR(MAX),
+    @Date DATETIME
+AS
+BEGIN
+    UPDATE Patients 
+    SET LastTriageSummary = @Summary, 
+        TriageEmbedding = @Vector, 
+        LastTriageDate = @Date
+    WHERE Id = @Id
+END
+GO

@@ -1,0 +1,15 @@
+-- שליפת אדמין לפי אימייל
+CREATE PROCEDURE sp_GetAdminByEmail
+ @Email NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        Id, 
+        FullName, 
+        Email, 
+        PasswordHash 
+    FROM Admins -- ודאי שזה שם הטבלה הנכון אצלך
+    WHERE Email = @Email;
+END

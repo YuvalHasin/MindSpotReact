@@ -1,0 +1,16 @@
+CREATE PROCEDURE sp_GetPatientProfile
+    @Email NVARCHAR(255)
+AS
+BEGIN
+    SELECT 
+        Id, 
+        FullName, 
+        Email, 
+        PasswordHash, 
+        LastTriageSummary, 
+        TriageEmbedding, 
+        LastTriageDate
+    FROM Patients
+    WHERE Email = @Email;
+END
+GO

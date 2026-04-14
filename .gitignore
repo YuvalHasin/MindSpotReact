@@ -1,0 +1,16 @@
+# Python secrets
+.env
+__pycache__/
+*.py[cod]
+
+# .NET secrets
+appsettings.json
+appsettings.Development.json
+bin/
+obj/
+
+# Node/React
+node_modules/
+.env.local
+
+MindSpot-server/App_Data/mindspot-push-firebase-adminsdk-fbsvc-e8a48aa32b.json

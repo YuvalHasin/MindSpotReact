@@ -90,6 +90,25 @@ namespace server.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+
+        [HttpPost("update-token")]
+        public IActionResult UpdateToken([FromBody] AdminToken tokenData)
+        {
+            int result = tokenData.SaveToken();
+
+            if (result > 0)
+                return Ok(new { message = "Token updated successfully" });
+
+            return BadRequest(new { message = "Failed to update token" });
+        }
+
+        // מחלקת עזר לקבלת הנתונים מה-React
+        public class TokenRequest
+        {
+            public int AdminId { get; set; }
+            public string Token { get; set; }
+        }
+
         public class LoginRequest
         {
             public string? Email { get; set; }

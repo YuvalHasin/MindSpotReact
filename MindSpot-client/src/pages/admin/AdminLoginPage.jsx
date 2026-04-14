@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Mail, Lock, ArrowLeft, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthError } from "@/components/ui/AuthError";
+import { getMessaging, getToken } from "firebase/messaging";
+import { messaging } from "../../firebaseConfig";
 
 const AdminLoginPage = () => {
   const navigate = useNavigate();
@@ -42,6 +44,27 @@ const AdminLoginPage = () => {
           sessionStorage.setItem("userId", data.userId);
           sessionStorage.setItem("token", data.token);
           sessionStorage.setItem("role", "admin");
+
+          // --- החלק החדש: עדכון טוקן ההתראות ---
+          try {
+            const currentToken = await getToken(messaging, { 
+              vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY 
+            });
+
+            if (currentToken) {
+              await fetch("https://localhost:7160/api/Auth/update-token", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ adminId: data.userId, fcmToken: currentToken })
+              });
+              console.log("Admin token updated successfully");
+            }
+          } catch (tokenErr) {
+            console.error("Failed to update push token:", tokenErr);
+            // אנחנו לא עוצרים את הכניסה אם רק ההתראות נכשלו
+          }
+          // ---------------------------------------
+
           navigate("/admin/admin-dashboard");
       } else {
         setError(data.message || "Login failed");

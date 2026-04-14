@@ -38,32 +38,46 @@ const TherapistAuthPage = () => {
 };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setErrors({});
-    if (!validate()) return;
-    
-    setLoading(true);
-    try {
-      const response = await fetch("https://localhost:7160/api/Therapists/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, specialties, bio, licenseNumber, phoneNumber, role: "Therapist" }),
-      });
+  e.preventDefault();
+  setError("");
+  setErrors({}); // ניקוי שגיאות קודמות
+  
+  if (!validate()) return;
+  
+  setLoading(true);
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || "Registration failed");
-      }
+  try {
+    const response = await fetch("https://localhost:7160/api/Therapists/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fullName, specialties, bio, licenseNumber, phoneNumber, role: "Therapist" }),
+    });
 
+    const data = await response.json();
+
+    if (response.ok) {
       setIsSuccess(true);
       setTimeout(() => { navigate("/"); }, 2000);
-    } catch (err) {
-      setError(err.message || "Something went wrong.");
-    } finally {
-      setLoading(false);
+    } else {
+      // כאן הקסם: אנחנו בודקים אם השרת החזיר אובייקט "errors"
+      if (data.errors) {
+        const serverErrors = {};
+        // מעבר על כל השגיאות שהשרת החזיר ומיפוי שלהן ל-State שלנו
+        if (data.errors.LicenseNumber) serverErrors.licenseNumber = data.errors.LicenseNumber[0];
+        if (data.errors.PhoneNumber) serverErrors.phoneNumber = data.errors.PhoneNumber[0];
+        if (data.errors.FullName) serverErrors.fullName = data.errors.FullName[0];
+        
+        setErrors(serverErrors);
+      } else {
+        setError(data.message || "Registration failed");
+      }
     }
-  };
+  } catch (err) {
+    setError("Unable to connect to the server.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const inputClass = "w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-background text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors";
 

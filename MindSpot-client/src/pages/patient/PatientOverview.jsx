@@ -17,7 +17,6 @@ const PatientOverview = () => {
         const userId = sessionStorage.getItem("userId");
         const token = sessionStorage.getItem("token");
         
-        // אם אין userId, סימן שהמשתמש לא מחובר באמת - אפשר להוסיף כאן ניווט חזרה ללוגין
         if (!userId) {
           console.error("No user ID found in session");
           return;

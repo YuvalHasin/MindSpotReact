@@ -54,7 +54,7 @@ const SecuritySettings = () => {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 space-y-6">
 
       <Link
-        to="/patient-dashboard" // או הנתיב המדויק של דף האוברביו שלך
+        to="/patient-dashboard" 
         className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4 transition-colors text-sm font-medium"
       >
         <ArrowLeft size={16} />

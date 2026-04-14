@@ -17,7 +17,7 @@ const Navbar = () => {
 
 // פונקציית הבדיקה למטופל
   const handleSupportClick = () => {
-    const userToken = sessionStorage.getItem("token"); // מפתח אחיד
+    const userToken = sessionStorage.getItem("token"); 
     setOpen(false); 
 
     if (userToken) {

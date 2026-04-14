@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../components/ui/button.jsx";
 import { ArrowLeft, ArrowRight, Brain, AlertTriangle, Shield, Loader2, CheckCircle2 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const emotionalCategories = [
   { id: "anxiety", label: "Anxiety & Worry", icon: "😰" },

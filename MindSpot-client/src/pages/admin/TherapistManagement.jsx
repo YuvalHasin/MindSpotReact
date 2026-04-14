@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Loader2, ShieldCheck, Phone, Mail, Award } from "lucide-react";
+import { Search, Loader2, ShieldCheck, Phone, Award } from "lucide-react";
 
 const TherapistManagement = () => {
   const [therapists, setTherapists] = useState([]);

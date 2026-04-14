@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Users, Clock, UserCheck, TrendingUp, AlertCircle, Bell, Loader2 } from "lucide-react";
+import { Users, Clock, UserCheck, Bell, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getToken, onMessage } from "firebase/messaging";
 import { messaging, VAPID_KEY } from "../../firebaseConfig";
@@ -90,7 +90,7 @@ const AdminOverview = () => {
       if (token) {
       }
     } catch (err) {
-      console.error("שגיאה בניסיון לשלוף טוקן:", err);
+      console.error("Error fetching FCM token:", err);
     }
   };
 
@@ -168,7 +168,7 @@ const AdminOverview = () => {
               <div>
                 <h3 className="text-sm font-bold text-orange-900">Therapist Registration Requests</h3>
                 <p className="text-xs text-orange-700">
-                  There are <strong>{data.pendingTherapists}</strong> professionals waiting for your verification.
+                  There are <strong>{data.pendingTherapists}</strong> therapists waiting for your verification.
                 </p>
               </div>
             </div>

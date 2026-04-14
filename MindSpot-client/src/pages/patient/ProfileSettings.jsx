@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Camera, User, Mail, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // ודאי שהאימפורט קיים בראש הקובץ
+import { Link } from "react-router-dom"; 
 import { ArrowLeft } from "lucide-react";
 
 const ProfileSettings = () => {

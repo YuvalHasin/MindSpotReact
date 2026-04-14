@@ -14,7 +14,6 @@ const PatientOverview = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       try {
-        // --- עדכון כאן: מעבר ל-sessionStorage ---
         const userId = sessionStorage.getItem("userId");
         const token = sessionStorage.getItem("token");
         
@@ -27,7 +26,7 @@ const PatientOverview = () => {
         const url = `https://localhost:7160/api/patients/details?id=${encodeURIComponent(userId)}`;
         const response = await fetch(url, {
           headers: { 
-            "Authorization": `Bearer ${token}`, // שימוש בטוקן מה-session
+            "Authorization": `Bearer ${token}`, 
             "Content-Type": "application/json"
           }
         });

@@ -15,7 +15,7 @@ namespace MindSpot_server.Models
         public string FullName { get; set; }
 
         [Required(ErrorMessage = "License number is required")]
-        [RegularExpression(@"^\d{4,10}$", ErrorMessage = "License must be between 4 to 10 digits")]
+        [RegularExpression(@"^27\/\d{4,6}$", ErrorMessage = "License format must be 27/XXXX or 27/XXXXX")]
         public string LicenseNumber { get; set; }
 
         [Required(ErrorMessage = "Phone number is required")]

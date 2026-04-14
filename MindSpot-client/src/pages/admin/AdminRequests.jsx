@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, X, UserPlus, Mail, Phone, Loader2, ShieldAlert, FileText, BadgeCheck } from "lucide-react";
+import { Check, X, UserPlus, Phone, Loader2, ShieldAlert, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
@@ -13,7 +13,6 @@ const AdminRequests = () => {
   const fetchRequests = async () => {
   try {
     const token = sessionStorage.getItem("token");
-    // שינוי ה-URL לנתיב המדויק מהקונטרולר שלך
     const response = await fetch("https://localhost:7160/api/admin/therapists/pending", {
       headers: { "Authorization": `Bearer ${token}` }
     });
@@ -22,7 +21,6 @@ const AdminRequests = () => {
 
     const data = await response.json();
     
-    // אין צורך ב-.filter() יותר! השרת כבר עושה את העבודה
     setRequests(data); 
   } catch (error) {
     console.error("Error fetching requests:", error);
@@ -78,7 +76,7 @@ const AdminRequests = () => {
           <p className="text-muted-foreground text-sm">Review incoming practitioner applications.</p>
         </div>
         <div className="bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-2">
-          <ShieldAlert size={14} /> {requests.length} Application{requests.length !== 1 ? 's' : ''}
+          <ShieldAlert size={14} /> {requests.length} Pending {requests.length !== 1 ? 's' : ''}
         </div>
       </div>
 
@@ -99,7 +97,7 @@ const AdminRequests = () => {
                 {requests.length === 0 ? (
                   <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     <td colSpan="5" className="px-6 py-20 text-center text-muted-foreground italic">
-                      All caught up! No pending applications.
+                      All caught up! No pending therapists.
                     </td>
                   </motion.tr>
                 ) : (

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Camera, User, Mail, Loader2, ArrowLeft, ShieldCheck, Lock, KeyRound } from "lucide-react";
+import { motion } from "framer-motion";
+import { User, Mail, Loader2, ArrowLeft, ShieldCheck, Lock, KeyRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,6 @@ const AdminSettings = () => {
       try {
         if (!userId) return;
 
-        // שימי לב: שיניתי את הנתיב ל-details (ודאי שקיים אצלך בקונטרולר)
         const response = await fetch(`https://localhost:7160/api/admin/details?id=${userId}`, {
           headers: { "Authorization": `Bearer ${token}` }
         });
@@ -55,7 +54,7 @@ const AdminSettings = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` // כאן עובר ה-token שנשמר בלוגין
+        "Authorization": `Bearer ${token}` 
       },
       body: JSON.stringify({
         Id: Number(userId),
@@ -68,10 +67,8 @@ const AdminSettings = () => {
 
     if (response.ok) {
       setIsSuccess(true);
-      // ... שאר הלוגיקה
     }
-    // ...
-  } catch (err) { /* ... */ }
+  } catch (err) {"error updating profile", err}
 };
 
   if (loading) return <div className="flex items-center justify-center min-h-[400px]"><Loader2 className="animate-spin text-primary w-8 h-8" /></div>;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { User, Phone, ArrowLeft, Loader2, Award, Briefcase } from "lucide-react";
 import { AuthError } from "@/components/ui/AuthError";
 
@@ -23,13 +23,17 @@ const TherapistAuthPage = () => {
   if (!fullName.trim()) newErrors.fullName = "Full name is required."; 
   if (!bio.trim()) newErrors.bio = "Bio is required."; 
   if (!specialties) newErrors.specialties = "Specialties are required."; 
-  if (!licenseNumber.trim()) newErrors.licenseNumber = "License number is required."; 
   
-  // בדיקת טלפון משופרת: גם אם ריק וגם אם הפורמט לא תקין
+  // ולידציה לרישיון בפורמט 27/4-5 ספרות
+  if (!licenseNumber.trim()) {
+    newErrors.licenseNumber = "License number is required.";
+  } else if (!/^27\/\d{4,5}$/.test(licenseNumber)) {
+    newErrors.licenseNumber = "Invalid format. Must be 27/ followed by 4 or 6 digits.";
+  }
+
   if (!phoneNumber.trim()) {
     newErrors.phoneNumber = "Phone number is required.";
   } else if (!/^\d{3}-?\d{7}$/.test(phoneNumber.replace(/\s/g, ""))) {
-    // בודק פורמט ישראלי סטנדרטי (למשל 0501234567 או 050-1234567)
     newErrors.phoneNumber = "Please enter a valid phone number.";
   }
 
@@ -59,7 +63,6 @@ const TherapistAuthPage = () => {
       setIsSuccess(true);
       setTimeout(() => { navigate("/"); }, 2000);
     } else {
-      // כאן הקסם: אנחנו בודקים אם השרת החזיר אובייקט "errors"
       if (data.errors) {
         const serverErrors = {};
         // מעבר על כל השגיאות שהשרת החזיר ומיפוי שלהן ל-State שלנו
@@ -130,7 +133,7 @@ const TherapistAuthPage = () => {
 
             {error && <p className="text-destructive text-sm font-medium">{error}</p>}
             <Button type="submit" className="w-full rounded-xl h-12" disabled={loading || isSuccess}>
-              {loading ? <Loader2 size={18} className="animate-spin" /> : isSuccess ? "Joined Successfully! Redirecting..." : "Submit Application"}
+              {loading ? <Loader2 size={18} className="animate-spin" /> : isSuccess ? "Submitted Successfully! Redirecting..." : "Submit request for joining"}
             </Button>
           </form>
         </div>

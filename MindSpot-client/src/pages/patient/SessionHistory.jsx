@@ -10,7 +10,6 @@ const SessionHistory = () => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        // ודאי שב-Login שמרת את ה-ID תחת השם הזה
         const userId = sessionStorage.getItem("userId"); 
         const token = sessionStorage.getItem("token");
 
@@ -111,7 +110,7 @@ const SessionHistory = () => {
       <div className="md:hidden space-y-4">
         {sessions.map((s, i) => (
           <motion.div
-            key={s.Id || `mobile-${i}`} // התיקון כאן למובייל
+            key={s.Id || `mobile-${i}`} 
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-card border border-border/60 rounded-2xl p-5 space-y-4 shadow-sm"

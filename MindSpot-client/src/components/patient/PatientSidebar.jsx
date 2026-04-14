@@ -1,5 +1,5 @@
-import { LayoutDashboard, History, UserCog, ShieldCheck, LogOut, ArrowLeft, MessageSquare } from "lucide-react";
-import { NavLink } from "./NavLink";
+import { LayoutDashboard, History, UserCog, ShieldCheck, LogOut, ArrowLeft } from "lucide-react";
+import { NavLink } from "./Navlink";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -16,7 +16,6 @@ const PatientSidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // מומלץ לנקות את כל המידע הרלוונטי ב-Logout
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId");
     sessionStorage.removeItem("userRole");

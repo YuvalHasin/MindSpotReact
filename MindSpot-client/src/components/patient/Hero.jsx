@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { Zap, Shield } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import heroBg from "../../assets/hero-bg.jpg";
 
 const Hero = () => {
-  
-  const navigate = useNavigate();
   
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">

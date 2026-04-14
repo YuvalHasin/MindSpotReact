@@ -50,8 +50,7 @@
               "RelativeToolTip": "DAL\\DBservices.cs",
               "ViewState": "AgIAACMDAAAAAAAAAAAqwDYDAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T17:57:42.689Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T17:57:42.689Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T16:37:41.692Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T16:37:41.692Z"
             },
             {
               "$type": "Document",
@@ -89,8 +87,7 @@
               "RelativeToolTip": "Controllers\\TherapistsController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAAABYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T15:56:17.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T15:56:17.591Z"
             },
             {
               "$type": "Document",
@@ -102,8 +99,7 @@
               "RelativeToolTip": "Models\\Admin.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAAwwFEAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T15:52:29.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T15:52:29.486Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "Controllers\\AdminController.cs",
               "ViewState": "AgIAAJcAAAAAAAAAAAAAAKcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T15:52:26.94Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T15:52:26.94Z"
             },
             {
               "$type": "Document",
@@ -128,8 +123,7 @@
               "RelativeToolTip": "Models\\Therapist.cs",
               "ViewState": "AgIAAB8AAAAAAAAAAAAiwD8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T15:35:26.396Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-13T15:35:26.396Z"
             }
           ]
         }

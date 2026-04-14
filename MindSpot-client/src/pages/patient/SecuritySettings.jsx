@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, ShieldCheck } from "lucide-react";
+import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom"; // ודאי שהאימפורט קיים בראש הקובץ
+import { Link } from "react-router-dom"; 
 import { ArrowLeft } from "lucide-react";
 
 const SecuritySettings = () => {
   const [passwords, setPasswords] = useState({ current: "", newPw: "", confirm: "" });
   const [isSuccess, setIsSuccess] = useState(false); // רק בשביל הצבע הירוק
   const [errorField, setErrorField] = useState({ field: "", message: "" });
-  const [twoFA, setTwoFA] = useState(false);
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
@@ -115,32 +114,6 @@ const SecuritySettings = () => {
              <p className="text-center text-xs text-destructive mt-2">{errorField.message}</p>
           )}
         </form>
-      </motion.div>
-
-      {/* 2FA Card */}
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }} 
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="bg-card border border-border rounded-2xl p-6"
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary/10 p-2.5 rounded-xl text-primary">
-              <ShieldCheck size={20} />
-            </div>
-            <div>
-              <p className="font-medium text-foreground text-sm">Two-Factor Authentication</p>
-              <p className="text-xs text-muted-foreground">Add an extra layer of security.</p>
-            </div>
-          </div>
-          <button
-            onClick={() => setTwoFA(!twoFA)}
-            className={`relative w-12 h-7 rounded-full transition-colors ${twoFA ? "bg-primary" : "bg-muted"}`}
-          >
-            <span className={`absolute top-1 left-1 w-5 h-5 rounded-full bg-background shadow-sm transition-transform ${twoFA ? "translate-x-5" : ""}`} />
-          </button>
-        </div>
       </motion.div>
     </div>
   );

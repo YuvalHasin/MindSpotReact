@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Lock, ArrowLeft, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthError } from "@/components/ui/AuthError";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getToken } from "firebase/messaging";
 import { messaging } from "../../firebaseConfig";
 
 const AdminLoginPage = () => {
@@ -45,7 +45,7 @@ const AdminLoginPage = () => {
           sessionStorage.setItem("token", data.token);
           sessionStorage.setItem("role", "admin");
 
-          // --- החלק החדש: עדכון טוקן ההתראות ---
+          // --- עדכון טוקן ההתראות ---
           try {
             const currentToken = await getToken(messaging, { 
               vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY 
@@ -61,9 +61,8 @@ const AdminLoginPage = () => {
             }
           } catch (tokenErr) {
             console.error("Failed to update push token:", tokenErr);
-            // אנחנו לא עוצרים את הכניסה אם רק ההתראות נכשלו
+            // לא עוצרים את הכניסה אם רק ההתראות נכשלו
           }
-          // ---------------------------------------
 
           navigate("/admin/admin-dashboard");
       } else {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // הוספתי useEffect
+import { useState, useEffect } from "react"; 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -22,7 +22,7 @@ const navItems = [
 
 const AdminSidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [pendingCount, setPendingCount] = useState(0); // State חדש לכמות הבקשות
+  const [pendingCount, setPendingCount] = useState(0); 
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const AdminSidebar = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          setPendingCount(data.pendingTherapists || 0); // מוודא שזה תואם לשם ב-C#
+          setPendingCount(data.pendingTherapists || 0); 
         }
       } catch (error) {
         console.error("Error fetching pending count:", error);
@@ -44,7 +44,6 @@ const AdminSidebar = () => {
     };
 
     fetchPendingCount();
-    // Polling אופציונלי: בדיקה כל דקה
     const interval = setInterval(fetchPendingCount, 60000);
     return () => clearInterval(interval);
   }, []);
@@ -54,7 +53,7 @@ const AdminSidebar = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("token");
-    navigate("/admin-login");
+    navigate("/");
   };
 
   return (

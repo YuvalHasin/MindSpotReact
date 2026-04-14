@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { Link } from "react-router-dom"; // ייבוא הלינק לניווט פנימי
+import { Link } from "react-router-dom"; 
 
 const Footer = () => {
   return (
@@ -48,7 +48,7 @@ const Footer = () => {
               © 2026 MindSpot. All rights reserved.
             </p>
             
-            {/* כפתור ה-Staff הדיסקרטי */}
+            {/* כפתור ה-Staff */}
             <Link 
               to="/admin-login" 
               className="text-[11px] font-medium text-muted-foreground/40 hover:text-primary transition-colors tracking-tight"

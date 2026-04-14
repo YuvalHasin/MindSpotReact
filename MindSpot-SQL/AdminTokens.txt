@@ -1,5 +1,0 @@
-CREATE TABLE AdminTokens (
-    AdminId INT PRIMARY KEY,
-    FCMToken NVARCHAR(MAX) NOT NULL,
-    LastUpdated DATETIME DEFAULT GETDATE()
-);

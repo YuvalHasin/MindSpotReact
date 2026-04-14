@@ -27,8 +27,8 @@ const TherapistAuthPage = () => {
   // ולידציה לרישיון בפורמט 27/4-5 ספרות
   if (!licenseNumber.trim()) {
     newErrors.licenseNumber = "License number is required.";
-  } else if (!/^27\/\d{4,5}$/.test(licenseNumber)) {
-    newErrors.licenseNumber = "Invalid format. Must be 27/ followed by 4 or 6 digits.";
+  } else if (!/^27-\d{4,6}$/.test(licenseNumber)) {
+    newErrors.licenseNumber = "Invalid format. Must be 27- followed by 4 or 6 digits.";
   }
 
   if (!phoneNumber.trim()) {

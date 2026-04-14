@@ -29,10 +29,7 @@ CREATE TABLE Patients (
     -- שדות ה-Triage וה-AI שהופיעו במחלקה שלך:
     LastTriageSummary NVARCHAR(MAX) NULL,
     TriageEmbeddingJson NVARCHAR(MAX) NULL,
-    LastTriageDate DATETIME NULL,
-
-    CONSTRAINT FK_Patient_Therapist FOREIGN KEY (CurrentTherapistId) 
-    REFERENCES Therapists(Id) ON DELETE SET NULL
+    LastTriageDate DATETIME NULL
 );
 
 CREATE TABLE ChatSessions (
@@ -42,12 +39,17 @@ CREATE TABLE ChatSessions (
     MessageCount INT DEFAULT 0,
     Summary NVARCHAR(MAX) NULL,
     
-    -- שינינו ל-TherapistName (NVARCHAR) כדי לשמור את השם שה-AI מצא
-    -- זה חוסך לנו Join מסובך אם אנחנו רק רוצים להציג את השם מההיסטוריה
+    -- חוסך Join מסובך אם אנחנו רק רוצים להציג את השם מההיסטוריה
     TherapistName NVARCHAR(255) NULL, 
 );
 GO
 
     CONSTRAINT FK_ChatSession_Patient FOREIGN KEY (PatientId) 
     REFERENCES Patients(Id)
+);
+
+CREATE TABLE AdminTokens (
+    AdminId INT PRIMARY KEY,
+    FCMToken NVARCHAR(MAX) NOT NULL,
+    LastUpdated DATETIME DEFAULT GETDATE()
 );
